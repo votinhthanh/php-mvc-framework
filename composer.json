@@ -1,0 +1,16 @@
+{
+    "name": "vtthanh/php-mvc-framework",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Thanh",
+            "email": "tinhthanh.vo@nfq.asia"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {}
+}
