@@ -23,12 +23,22 @@ class Router
         $this->response = $response;
     }
 
-    public function get($path, $callback)
+    /**
+     * @param $path
+     * @param $callback
+     * @return void
+     */
+    public function get($path, $callback): void
     {
         $this->routes['get'][$path] = $callback;
     }
 
-    public function post($path, $callback)
+    /**
+     * @param $path
+     * @param $callback
+     * @return void
+     */
+    public function post($path, $callback): void
     {
         $this->routes['post'][$path] = $callback;
     }
@@ -36,7 +46,7 @@ class Router
     public function resolve()
     {
         $path = $this->request->getPath();
-        $method = $this->request->getMethod();
+        $method = $this->request->method();
         $callback = $this->routes[$method][$path] ?? false;
 
         if (!$callback) {
@@ -56,14 +66,19 @@ class Router
         return call_user_func($callback, $this->request);
     }
 
-    public function renderView(string $view, $params = [])
+    /**
+     * @param string $view
+     * @param array $params
+     * @return array|bool|string
+     */
+    public function renderView(string $view, array $params = []): array|bool|string
     {
         $layoutContent = $this->layoutContent();
         $viewContent = $this->renderOnlyView($view, $params);
         return str_replace('{{ content }}' , $viewContent, $layoutContent);
     }
 
-    protected function layoutContent()
+    protected function layoutContent(): bool|string
     {
         $layout = Application::$app->controller->layout;
         ob_start();
@@ -71,12 +86,17 @@ class Router
         return ob_get_clean();
     }
 
-    protected function renderOnlyView($view, $params)
+    /**
+     * @param $view
+     * @param $params
+     * @return bool|string
+     */
+    protected function renderOnlyView($view, $params): bool|string
     {
-        foreach ($params as $key => $param)
-        {
+        foreach ($params as $key => $param) {
             $$key = $param;
         }
+
         ob_start();
         include_once Application::$ROOT_DIR."/views/$view.php";
         return ob_get_clean();

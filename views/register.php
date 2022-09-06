@@ -1,36 +1,17 @@
 <h1 style="text-align:center;margin-top: 50px">Register a new account</h1>
 
-<form action="/register" method="post">
-    <div class="row">
-        <div class="col">
-            <div class="mb-3">
-                <label for="firstname" class="form-label">Firstname</label>
-                <input type="text" class="form-control" id="firstname" name="firstname">
-            </div>
-        </div>
-        <div class="col">
-            <div class="mb-3">
-                <label for="lastname" class="form-label">Lastname</label>
-                <input type="text" class="form-control" id="lastname" name="lastname">
-            </div>
-        </div>
+<?php $form = app\core\form\Form::begin('/register', "post") ?>
+<div class="row">
+    <div class="col">
+        <?php echo $form->field($model, 'firstname') ?>
     </div>
+    <div class="col">
+        <?php echo $form->field($model, 'lastname') ?>
+    </div>
+</div>
+<?php echo $form->field($model, 'email')->emailField() ?>
+<?php echo $form->field($model, 'password')->passwordField() ?>
+<?php echo $form->field($model, 'passwordConfirm')->passwordField() ?>
 
-    <div class="mb-3">
-        <label for="phone_number" class="form-label">Phone number</label>
-        <input type="text" class="form-control" id="phone_number" name="phone_number">
-    </div>
-    <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username">
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password">
-    </div>
-    <div class="mb-3">
-        <label for="re-password" class="form-label">Confirm password</label>
-        <input type="password" class="form-control" id="re-password" name="re_password">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<button type="submit" class="btn btn-primary">Sign up</button>
+<?php app\core\form\Form::end() ?>

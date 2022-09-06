@@ -11,11 +11,21 @@ class Controller
 {
     public string $layout = 'main';
 
-    public function setLayout($layout)
+    /**
+     * @param $layout
+     * @return void
+     */
+    public function setLayout($layout): void
     {
         $this->layout = $layout;
     }
-    public function render($view, $params = [])
+
+    /**
+     * @param $view
+     * @param array $params
+     * @return array|false|string|string[]
+     */
+    public function render($view, array $params = []): array|bool|string
     {
         return Application::$app->router->renderView($view, $params);
     }

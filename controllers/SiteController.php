@@ -13,18 +13,30 @@ use app\core\Request;
 
 class SiteController extends Controller
 {
-    public function home()
+    /**
+     * @return array|bool|string
+     */
+    public function home(): array|bool|string
     {
         $params = [
             'name' => 'Vo tinh thanh'
         ];
         return $this->render('home', $params);
     }
-    public function contact()
+
+    /**
+     * @return array|false|string|string[]
+     */
+    public function contact(): array|bool|string
     {
         return $this->render('contact');
     }
-    public function handleContact(Request $request)
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function handleContact(Request $request): string
     {
         $requestData = $request->getBody();
 
